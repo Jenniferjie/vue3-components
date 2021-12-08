@@ -1,0 +1,71 @@
+.gui-input-wrap {
+  border: 1px solid #000;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  &.gui-size-small {
+    height: 20px;
+
+    input {
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+
+  &.gui-size-normal {
+    height: 36px;
+
+    input {
+      height: 36px;
+      line-height: 36px;
+    }
+  }
+
+  &.gui-size-large {
+    height: 48px;
+
+    input {
+      height: 48px;
+      line-height: 48px;
+    }
+  }
+
+  input {
+    border: none;
+    flex: 1;
+    padding: 0 15px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .gui-input-clear {
+    width: 15px;
+    margin-right: 10px;
+  }
+
+  .gui-input-group_append,
+  .gui-input-group_prepend {
+    width: 10%;
+    background: #000;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      fill: #FFF;
+    }
+  }
+
+  .gui-input_prefix {
+    padding-left: 10px;
+  }
+
+  .gui-input_suffix {
+    padding-right: 10px;
+  }
+}
