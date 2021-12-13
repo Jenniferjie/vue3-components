@@ -1,14 +1,13 @@
 {
   "name": "ui-web",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "ui-component": "^0.0.0",
+    "@jenniferjiajie/ui-component": "^1.0.0",
     "vue": "^3.2.23"
   },
   "devDependencies": {

@@ -3,10 +3,12 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 // import HelloWorld from './components/HelloWorld.vue'
 import { ref } from 'vue';
-import { Input } from 'ui-component';
+import { Input } from '@jenniferjiajie/ui-component';
+import { DatePicker } from '@jenniferjiajie/ui-component';
 import { RiSearch2Line } from 'vue-remix-icons'
 
 const val = ref('');
+const dateVal = ref('');
 </script>
 
 <template>
@@ -26,6 +28,8 @@ const val = ref('');
       <RiSearch2Line />
     </template>
   </Input>
+
+  <DatePicker v-model="dateVal" type="month" />
 </template>
 
 <style>
