@@ -1,6 +1,6 @@
 <template>
   <section @click="handleClosePanel">
-    <Input v-bind="$attrs" @focus="openPanel" />
+    <Input :value="modelValue" v-bind="$attrs" @focus="openPanel" />
     <transition>
       <div v-show="panelVisible">
         <div class="date-top-bar">
@@ -51,9 +51,11 @@ const openPanel = () => {
 };
 
 const handleSelect = (val) => {
-  console.log(val);
-
   emit('update:modelValue', val)
+};
+
+const handleClosePanel = () => {
+  state.panelVisible = false;
 }
 
 const { panelVisible } = toRefs(state)

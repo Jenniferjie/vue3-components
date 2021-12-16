@@ -258,15 +258,15 @@
         state.panelVisible = true;
       };
       const handleSelect = (val) => {
-        console.log(val);
         emit("update:modelValue", val);
+      };
+      const handleClosePanel = () => {
+        state.panelVisible = false;
       };
       const { panelVisible } = vue.toRefs(state);
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("section", {
-          onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClosePanel && _ctx.handleClosePanel(...args))
-        }, [
-          vue.createVNode(script$2, vue.mergeProps(_ctx.$attrs, { onFocus: openPanel }), null, 16),
+        return vue.openBlock(), vue.createElementBlock("section", { onClick: handleClosePanel }, [
+          vue.createVNode(script$2, vue.mergeProps({ value: __props.modelValue }, _ctx.$attrs, { onFocus: openPanel }), null, 16, ["value"]),
           vue.createVNode(vue.Transition, null, {
             default: vue.withCtx(() => [
               vue.withDirectives(vue.createElementVNode("div", null, [
