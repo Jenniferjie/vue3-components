@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table class="table-year-month">
     <tr v-for="(row, index) in rows" :key="index">
       <td v-for="cell in row" :key="cell.label">
         <span @click="handleSelect(cell.value)">{{ cell.label }}</span>
@@ -14,17 +14,6 @@ import { MONTHS } from '../meta';
 
 type TargetElement = HTMLInputElement | HTMLTextAreaElement
 
-// const props = defineProps({
-//   modelValue: {
-//     type: String,
-//     default: '',
-//   },
-
-//   type: {
-//     type: String,
-//     default: 'dates',
-//   },
-// });
 const attrs = useAttrs();
 const emit = defineEmits(['select'])
 
@@ -45,12 +34,8 @@ const rows = computed(() => {
 });
 
 const handleSelect = (val) => {
-  console.log(val);
-
-  emit('select', val);
-}
-
-// const { panelVisible } = toRefs(state)
+  emit('select', val, 'month');
+};
 
 </script>
 

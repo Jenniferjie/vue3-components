@@ -1,5 +1,7 @@
+@import "../app.scss";
+
 .gui-input-wrap {
-  border: 1px solid #000;
+  border: 2px solid $primary-color;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -45,12 +47,17 @@
   .gui-input-clear {
     width: 15px;
     margin-right: 10px;
+    fill: #999;
+  }
+
+  .gui-input_limit {
+    color: #999;
   }
 
   .gui-input-group_append,
   .gui-input-group_prepend {
     width: 10%;
-    background: #000;
+    background: $primary-color;
     height: 100%;
     display: flex;
     align-items: center;

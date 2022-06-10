@@ -19,11 +19,11 @@
       </Icon>
     </span>
 
+    <!-- :value="modelValue" -->
     <input
-      :value="modelValue"
       :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
       :disabled="disabled"
-      v-bind="$attrs"
+      v-bind="attrs"
       @input="handleInput"
     >
     <!-- clearable -->
@@ -34,7 +34,7 @@
     />
 
     <!-- 限制字符长度 -->
-    <div v-if="isWordLimitVisible">
+    <div v-if="isWordLimitVisible" class="gui-input_limit">
       {{ wordCount }}/{{ $attrs.maxlength || 0 }}
     </div>
 
@@ -115,8 +115,9 @@ const props = defineProps({
     default: null,
   },
 });
-console.log(props);
 const attrs = useAttrs();
+console.log(attrs);
+
 
 
 // 样式
@@ -154,7 +155,7 @@ const handleInput = (e: Event) => {
 };
 
 const onMouseEnter = () => {
-  if (props.modelValue) {
+  if (attrs.value) {
     state.isShowIcon = true;
   }
 }
