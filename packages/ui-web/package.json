@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@jenniferjiajie/ui-component": "^1.0.0",
+    "dayjs": "^1.11.3",
     "vue": "^3.2.23"
   },
   "devDependencies": {

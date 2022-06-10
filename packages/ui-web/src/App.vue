@@ -8,28 +8,39 @@ import { DatePicker } from '@jenniferjiajie/ui-component';
 import { RiSearch2Line } from 'vue-remix-icons'
 
 const val = ref('');
+const monthVal = ref('');
+const yearVal = ref('');
 const dateVal = ref('');
 </script>
 
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
-  <Input
-    v-model="val"
-    clearable
-    show-word-limit
-    maxlength="30"
-    :prefix-icon="RiSearch2Line"
-  >
-    <template #prepend>
-      <RiSearch2Line />
-    </template>
-    <template #append>
-      <RiSearch2Line />
-    </template>
-  </Input>
+  <div style="margin-bottom: 10px">
+    <Input
+      v-model="val"
+      clearable
+      show-word-limit
+      maxlength="30"
+      :prefix-icon="RiSearch2Line"
+    >
+      <template #prepend>
+        <RiSearch2Line />
+      </template>
+      <template #append>
+        <RiSearch2Line />
+      </template>
+    </Input>
+  </div>
+  
 
-  <DatePicker v-model="dateVal" type="month" />
+  <div style="margin-bottom: 10px">
+    <DatePicker v-model="monthVal" type="month" />
+  </div>
+  <div style="margin-bottom: 10px">
+    <DatePicker clearable v-model="yearVal" type="year" />
+  </div>
+  <div style="margin-bottom: 10px">
+    <DatePicker clearable v-model="dateVal" />
+  </div>
 </template>
 
 <style>
