@@ -1,16 +1,68 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-// import HelloWorld from './components/HelloWorld.vue'
-import { ref } from 'vue';
+<script setup lang="jsx">
+import { ref, computed } from 'vue';
 import { Input } from '@jenniferjiajie/ui-component';
 import { DatePicker } from '@jenniferjiajie/ui-component';
-import { RiSearch2Line } from 'vue-remix-icons'
+import { Table } from '@jenniferjiajie/ui-component';
+import { RiSearch2Line } from 'vue-remix-icons';
 
 const val = ref('');
 const monthVal = ref('');
 const yearVal = ref('');
 const dateVal = ref('');
+
+const columns = computed(() => ([{
+  title: '日期',
+  dataIndex: 'date',
+  key: 'date',
+},
+{
+  title: '姓名',
+  dataIndex: 'name',
+  key: 'name',
+},
+{
+  title: '住址',
+  dataIndex: 'address',
+  key: 'address',
+  width: 700,
+}, {
+  title: '操作',
+  dataIndex: 'action',
+  key: 'action',
+  fixed: true,
+  render: (h, { row }) => (
+    <div onClick={handleClick(row)}>点击</div>
+  ),
+}]));
+
+const tableData = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+];
+
+const handleClick = (row) => {
+  return () => {
+    console.log(row);
+  }
+};
 </script>
 
 <template>
@@ -36,14 +88,29 @@ const dateVal = ref('');
     <DatePicker v-model="monthVal" type="month" />
   </div>
   <div style="margin-bottom: 10px">
-    <DatePicker clearable v-model="yearVal" type="year" />
+    <DatePicker v-model="yearVal" type="year" />
   </div>
   <div style="margin-bottom: 10px">
-    <DatePicker clearable v-model="dateVal" />
+    <DatePicker v-model="dateVal" />
+  </div>
+
+  <div style="margin-bottom: 10px">
+    <Table
+      :data="tableData"
+      :columns="columns"
+      stripe
+      border
+      height="100"
+    />
   </div>
 </template>
 
 <style>
+* {
+  padding: 0;
+  margin: 0;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

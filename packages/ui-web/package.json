@@ -9,6 +9,8 @@
   "dependencies": {
     "@jenniferjiajie/ui-component": "^1.0.0",
     "dayjs": "^1.11.3",
+    "normalize-wheel-es": "^1.1.2",
+    "prismjs": "^1.28.0",
     "vue": "^3.2.23"
   },
   "devDependencies": {
