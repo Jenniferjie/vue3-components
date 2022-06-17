@@ -21,10 +21,12 @@
 
     <!-- :value="modelValue" -->
     <input
+      ref="input"
       :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
       :disabled="disabled"
-      v-bind="attrs"
+      v-bind="$attrs"
       @input="handleInput"
+      @change="handleChange"
     >
     <!-- clearable -->
     <RiCloseCircleLine
@@ -58,14 +60,13 @@
     </div>
   </section>
   <section v-else>
-    <textarea :value="modelValue" name="" id="" cols="30" rows="10"></textarea>
+    <textarea ref="textarea" name="" id="" cols="30" rows="10"></textarea>
   </section>
 </template>
 
 <script lang="ts" setup="props, context">
 import { RiCloseCircleLine, RiEyeLine, RiEyeOffLine } from 'vue-remix-icons'
-import { computed, reactive, toRefs, watch, useAttrs } from 'vue';
-import Icon from '../icon/index.vue';
+import { computed, reactive, toRefs, watch, useAttrs, shallowRef } from 'vue';
 
 type TargetElement = HTMLInputElement | HTMLTextAreaElement
 
@@ -116,7 +117,9 @@ const props = defineProps({
   },
 });
 const attrs = useAttrs();
-console.log(attrs);
+const input = shallowRef(null);
+const textarea = shallowRef(null);
+const _ref = computed(() => input.value || textarea.value)
 
 
 
@@ -139,15 +142,22 @@ const state = reactive({
   wordCount: 0,
 });
 
+const setNativeInputValue = () => {
+  const input = _ref.value
+  if (!input || input.value === props.modelValue) return
+  input.value = props.modelValue
+}
+
 watch(
   () => props.modelValue,
   (val) => {
     state.isShowIcon = !!val;
     state.wordCount = val.length;
+    setNativeInputValue();
   }
 )
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'input', 'change'])
 
 const handleInput = (e: Event) => {
   const { value } = e.target as TargetElement;
@@ -155,17 +165,23 @@ const handleInput = (e: Event) => {
 };
 
 const onMouseEnter = () => {
-  if (attrs.value) {
+  if (props.modelValue) {
     state.isShowIcon = true;
   }
 }
 
 const onMouseLeave = () => {
   state.isShowIcon = false;
+};
+
+const handleChange = (event: Event) => {
+  emit('change', (event.target as TargetElement).value);
 }
 
 const handleClear = () => {
-  emit('update:modelValue', '')
+  emit('update:modelValue', '');
+  emit('change', '');
+  emit('input', '')
 }
 
 const { isShowIcon, passwordVisible, wordCount } = toRefs(state)

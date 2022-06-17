@@ -43,7 +43,7 @@ const handleClass = (i, j) => {
   const classArray = [];
   const selectedYear = startYear.value + i * 4 + j;
   
-  if (selectedYear === +dayjs().format('YYYY') || +props.modelData.modelValue === selectedYear) {
+  if (selectedYear === +dayjs().format('YYYY') || +props.modelData.userInputDate === selectedYear) {
     classArray.push("green-actived");
   }
 

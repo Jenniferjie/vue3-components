@@ -19,7 +19,7 @@ export default {
   }],
   sourceMap: true,
   plugins: [
-    // terser(),
+    terser(),
     scss({
       include: /\.scss$/,
       sass: dartSass,

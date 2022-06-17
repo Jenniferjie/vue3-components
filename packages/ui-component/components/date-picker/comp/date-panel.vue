@@ -67,8 +67,8 @@ const handleSelect = (obj) => {
 
 const handleClass = (item) => {
   let classArray = [];
-  const { modelData: { modelValue, currentDate } } = props;
-  if (item.value === dayjs(modelValue).date() && currentDate.month() === dayjs(modelValue).month()) {
+  const { modelData: { userInputDate, currentDate } } = props;
+  if (item.value === dayjs(userInputDate).date() && currentDate.month() === dayjs(userInputDate).month()) {
     classArray = ["select-actived"];
   }
 

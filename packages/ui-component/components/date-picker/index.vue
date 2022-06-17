@@ -1,6 +1,11 @@
 <template>
   <section v-click-outside="handleClosePanel" class="outer">
-    <Input :value="modelValue" v-bind="$attrs" @focus="openPanel" />
+    <Input
+      v-bind="$attrs"
+      :model-value="userInputDate"
+      @input="(val) => userInputDate = val"
+      @focus="openPanel"
+    />
     <transition>
       <div v-show="panelVisible" class="panel-wrap">
         <div class="date-top-bar">
@@ -21,7 +26,7 @@
           </div>
         </div>
         <div v-if="type === 'year'" class="panel-content">
-          <YearPanel @select="handleSelect" :modelData="{ currentDate, modelValue }" />
+          <YearPanel @select="handleSelect" :modelData="{ currentDate, userInputDate }" />
         </div>
 
         <div v-if="type === 'month'" class="panel-content">
@@ -29,7 +34,7 @@
         </div>
 
         <div v-if="type === 'dates'" class="panel-content">
-          <DatePanel @select="handleSelect" :modelData="{ currentDate, modelValue }" />
+          <DatePanel @select="handleSelect" :modelData="{ currentDate, userInputDate }" />
         </div>
       </div>
     </transition>
@@ -65,23 +70,20 @@ const vClickOutside = {
 type TargetElement = HTMLInputElement | HTMLTextAreaElement
 
 const props = defineProps({
-  modelValue: {
-    type: String,
-    default: '',
-  },
-
   type: {
     type: String,
     default: 'dates',
   },
-
-  // clearable: Boolean,
 });
-const attrs = useAttrs();
-console.log(attrs);
+const defaultAttrs = useAttrs();
+const attrs = computed(() => ({
+  clearable: true,
+  ...defaultAttrs,
+}))
 
-const emit = defineEmits(['update:modelValue']);
 const currentDate = ref(dayjs());
+const userInputDate = ref(null);
+
 
 const yearLabel = computed(() => {
   if (props.type === 'year') {
@@ -119,18 +121,19 @@ const moveMonth = (forward) => {
 const handleSelect = (val, type) => {
   switch (type) {
     case "year":
-      emit('update:modelValue', dayjs().year(val).format("YYYY"));
+      userInputDate.value = dayjs().year(val).format("YYYY");
       break;
     case "month":
-      emit('update:modelValue', dayjs().month(val).format("YYYY-MM"));
+      userInputDate.value = dayjs().month(val).format("YYYY-MM");
       break;
   
     default:
       const currentMonth = val.previousMonth ? currentDate.value.month() - 1 : currentDate.value.month();
       currentDate.value = currentDate.value.set('month', currentMonth);
-      emit('update:modelValue', dayjs().month(currentMonth).date(val.value).format("YYYY-MM-DD"));
+      userInputDate.value = dayjs().month(currentMonth).date(val.value).format("YYYY-MM-DD");
       break;
   }
+  
   state.panelVisible = false;
 };
 

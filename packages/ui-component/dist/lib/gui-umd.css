@@ -1,3 +1,38 @@
+.table-outer {
+  overflow: hidden;
+}
+.table-outer .table-inner {
+  position: relative;
+}
+.table-outer .table-inner .table-header-wrapper {
+  overflow: hidden;
+}
+.table-outer .table-inner .table-scroll {
+  overflow: hidden;
+}
+.table-outer .table-inner .table-scroll .table-scroll-wrapper {
+  overflow-y: overlay;
+  height: 100%;
+}
+.table-outer .table-inner .table-wrapper {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.table-outer .table-inner .table-wrapper tbody td, .table-outer .table-inner .table-wrapper tbody th, .table-outer .table-inner .table-wrapper thead td, .table-outer .table-inner .table-wrapper thead th {
+  padding: 8px 0;
+}
+.table-outer .table-inner .table-wrapper.table-border {
+  border: 1px solid #ebeef5;
+}
+.table-outer .table-inner .table-wrapper.table-border td, .table-outer .table-inner .table-wrapper.table-border th {
+  border-bottom: 1px solid #ebeef5;
+  border-right: 1px solid #ebeef5;
+  background: #FFF;
+}
+.table-outer .table-inner .table-wrapper .table-stripe td {
+  background: #FAFAFA;
+}
+
 .gui-input-wrap {
   border: 2px solid #13ae7b;
   border-radius: 4px;
